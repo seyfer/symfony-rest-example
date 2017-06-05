@@ -4,7 +4,7 @@
 parameters:
     database_host: 127.0.0.1
     database_port: ~
-    database_name: symfony
+    database_name: symfony_crv_rest
     database_user: root
     database_password: ~
     # You should uncomment this if you want to use pdo_sqlite
@@ -17,3 +17,10 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    # nelmio cors
+    cors_allow_origin: 'http://localhost:8000'
+
+    # nelmio api docs
+    api_name: 'Symfony 3 REST Example'
+    api_description: 'Some clever description goes here'
