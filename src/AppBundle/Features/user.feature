@@ -22,113 +22,113 @@ Feature: Manage Users data via the RESTful API
     Then the response code should 405
 
 
-  Scenario: User can GET their personal data by their unique ID
-    When I send a "GET" request to "/users/u1"
-    Then the response code should 200
-    And the response header "Content-Type" should be equal to "application/json; charset=utf-8"
-    And the response should contain json:
-      """
-      {
-        "id": "u1",
-        "email": "peter@test.com",
-        "username": "peter",
-        "accounts": [
-          {
-            "id": "a1",
-            "name": "account1"
-          }
-        ]
-      }
-      """
-
-
-  Scenario: User cannot GET a different User's personal data
-    When I send a "GET" request to "/users/u2"
-    Then the response code should 403
-
-
-  Scenario: User cannot determine if another User ID is active
-    When I send a "GET" request to "/users/u100"
-    Then the response code should 403
-
-
-  Scenario: User cannot POST to the Users collection
-    When I send a "POST" request to "/users"
-    Then the response code should 405
-
-
-  Scenario: User can PATCH to update their personal data
-    When I send a "PATCH" request to "/users/u1" with body:
-      """
-      {
-        "email": "peter@something-else.net",
-        "current_password": "testpass"
-      }
-      """
-    Then the response code should 204
-    And I send a "GET" request to "/users/u1"
-    And the response should contain json:
-      """
-      {
-        "id": "u1",
-        "email": "peter@something-else.net",
-        "username": "peter",
-        "accounts": [
-          {
-            "id": "a1",
-            "name": "account1"
-          }
-        ]
-      }
-      """
-
-
-  Scenario: User cannot PATCH without a valid password
-    When I send a "PATCH" request to "/users/u1" with body:
-      """
-      {
-        "email": "peter@something-else.net",
-        "current_password": "wrong-password"
-      }
-      """
-    Then the response code should 400
-
-
-  Scenario: User cannot PATCH a different User's personal data
-    When I send a "PATCH" request to "/users/u2"
-    Then the response code should 403
-
-
-  Scenario: User cannot PATCH a none existent User
-    When I send a "PATCH" request to "/users/u100"
-    Then the response code should 403
-
-
-  Scenario: User cannot PUT to replace their personal data
-    When I send a "PUT" request to "/users/u1"
-    Then the response code should 405
-
-
-  Scenario: User cannot PUT a different User's personal data
-    When I send a "PUT" request to "/users/u2"
-    Then the response code should 405
-
-
-  Scenario: User cannot PUT a none existent User
-    When I send a "PUT" request to "/users/u100"
-    Then the response code should 405
-
-
-  Scenario: User cannot DELETE their personal data
-    When I send a "DELETE" request to "/users/u1"
-    Then the response code should 405
-
-
-  Scenario: User cannot DELETE a different User's personal data
-    When I send a "DELETE" request to "/users/u2"
-    Then the response code should 405
-
-
-  Scenario: User cannot DELETE a none existent User
-    When I send a "DELETE" request to "/users/u100"
-    Then the response code should 405
+#  Scenario: User can GET their personal data by their unique ID
+#    When I send a "GET" request to "/users/u1"
+#    Then the response code should 200
+#    And the response header "Content-Type" should be equal to "application/json; charset=utf-8"
+#    And the response should contain json:
+#      """
+#      {
+#        "id": "u1",
+#        "email": "peter@test.com",
+#        "username": "peter",
+#        "accounts": [
+#          {
+#            "id": "a1",
+#            "name": "account1"
+#          }
+#        ]
+#      }
+#      """
+#
+#
+#  Scenario: User cannot GET a different User's personal data
+#    When I send a "GET" request to "/users/u2"
+#    Then the response code should 403
+#
+#
+#  Scenario: User cannot determine if another User ID is active
+#    When I send a "GET" request to "/users/u100"
+#    Then the response code should 403
+#
+#
+#  Scenario: User cannot POST to the Users collection
+#    When I send a "POST" request to "/users"
+#    Then the response code should 405
+#
+#
+#  Scenario: User can PATCH to update their personal data
+#    When I send a "PATCH" request to "/users/u1" with body:
+#      """
+#      {
+#        "email": "peter@something-else.net",
+#        "current_password": "testpass"
+#      }
+#      """
+#    Then the response code should 204
+#    And I send a "GET" request to "/users/u1"
+#    And the response should contain json:
+#      """
+#      {
+#        "id": "u1",
+#        "email": "peter@something-else.net",
+#        "username": "peter",
+#        "accounts": [
+#          {
+#            "id": "a1",
+#            "name": "account1"
+#          }
+#        ]
+#      }
+#      """
+#
+#
+#  Scenario: User cannot PATCH without a valid password
+#    When I send a "PATCH" request to "/users/u1" with body:
+#      """
+#      {
+#        "email": "peter@something-else.net",
+#        "current_password": "wrong-password"
+#      }
+#      """
+#    Then the response code should 400
+#
+#
+#  Scenario: User cannot PATCH a different User's personal data
+#    When I send a "PATCH" request to "/users/u2"
+#    Then the response code should 403
+#
+#
+#  Scenario: User cannot PATCH a none existent User
+#    When I send a "PATCH" request to "/users/u100"
+#    Then the response code should 403
+#
+#
+#  Scenario: User cannot PUT to replace their personal data
+#    When I send a "PUT" request to "/users/u1"
+#    Then the response code should 405
+#
+#
+#  Scenario: User cannot PUT a different User's personal data
+#    When I send a "PUT" request to "/users/u2"
+#    Then the response code should 405
+#
+#
+#  Scenario: User cannot PUT a none existent User
+#    When I send a "PUT" request to "/users/u100"
+#    Then the response code should 405
+#
+#
+#  Scenario: User cannot DELETE their personal data
+#    When I send a "DELETE" request to "/users/u1"
+#    Then the response code should 405
+#
+#
+#  Scenario: User cannot DELETE a different User's personal data
+#    When I send a "DELETE" request to "/users/u2"
+#    Then the response code should 405
+#
+#
+#  Scenario: User cannot DELETE a none existent User
+#    When I send a "DELETE" request to "/users/u100"
+#    Then the response code should 405
